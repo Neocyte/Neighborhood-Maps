@@ -1,8 +1,11 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
+import Map from './Map';
+import List from './List';
+import Filter from './Filter';
 import './App.css';
 
-class MapApp extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <div className="App">
@@ -12,4 +15,4 @@ class MapApp extends React.Component {
   }
 }
 
-export default MapApp;
+export default App;
