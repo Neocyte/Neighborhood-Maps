@@ -26,6 +26,13 @@ class Map extends React.Component {
 
     var largeInfowindow = new google.maps.InfoWindow();
 
+    // Style the markers a bit. This will be our listing marker icon.
+    var defaultIcon = makeMarkerIcon('0091ff');
+
+    // Create a "highlighted location" marker color for when the user
+    // mouses over the marker.
+    var highlightedIcon = makeMarkerIcon('FFFF24');
+
     // The following group uses the location array to create an array of markers on initialize.
     for (var i = 0; i < locations.length; i++) {
       // Get the position from the location array.
@@ -36,6 +43,7 @@ class Map extends React.Component {
         map: map,
         position: position,
         title: title,
+        icon: defaultIcon,
         animation: google.maps.Animation.DROP,
         id: i
       });
@@ -46,6 +54,15 @@ class Map extends React.Component {
       // Create an onclick event to open an infowindow at each marker.
       marker.addListener('click', function() {
         populateInfoWindow(this, largeInfowindow);
+      });
+
+      // Two event listeners - one for mouseover, one for mouseout,
+      // to change the colors back and forth.
+      marker.addListener('mouseover', function() {
+        this.setIcon(highlightedIcon);
+      });
+      marker.addListener('mouseout', function() {
+        this.setIcon(defaultIcon);
       });
     }
   }
@@ -64,6 +81,20 @@ class Map extends React.Component {
         infowindow.setMarker = null;
       });
     }
+  }
+
+  // This function takes in a COLOR, and then creates a new marker
+  // icon of that color. The icon will be 21 px wide by 34 high, have an origin
+  // of 0, 0 and be anchored at 10, 34).
+  makeMarkerIcon(markerColor) {
+    var markerImage = new google.maps.MarkerImage(
+      'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
+      '|40|_|%E2%80%A2',
+      new google.maps.Size(21, 34),
+      new google.maps.Point(0, 0),
+      new google.maps.Point(10, 34),
+      new google.maps.Size(21,34));
+    return markerImage;
   }
 
   render() {
