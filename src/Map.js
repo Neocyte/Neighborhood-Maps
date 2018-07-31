@@ -8,9 +8,16 @@ class Map extends React.Component {
 
   };
 
+  initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: , lng: },
+      zoom:
+    });
+  }
+
   render() {
     return (
-
+      <div id="map"></div>
     )
   }
 }
