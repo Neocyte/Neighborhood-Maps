@@ -26,9 +26,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-
+        <Route exact path="/" render={() => (
+          <div class="container">
+            <h1>Great Eats at Chinatown, New York</h1>
+            <Map />
+          </div>
+        )}>
       </div>
-    );
+    )
   }
 }
 
