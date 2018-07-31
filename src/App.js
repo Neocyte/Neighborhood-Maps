@@ -31,7 +31,7 @@ class App extends React.Component {
             <h1>Great Eats at Chinatown, New York</h1>
             <Map />
           </div>
-        )}>
+        )}/>
       </div>
     )
   }
