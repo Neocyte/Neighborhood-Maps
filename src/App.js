@@ -7,9 +7,9 @@ import './App.css';
 
 
 class App extends React.Component {
-  // Takes in a Google Maps API key and loads it as an asynchronous script 
+  // Takes in a Google Maps API key and loads it as an asynchronous script
   componentDidMount() {
-    loadMapScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDfbodKmXxdACXyjtz6ziKt8h1f-GB0UFs&v=3&callback=initMap')
+    loadMapScript('https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyDfbodKmXxdACXyjtz6ziKt8h1f-GB0UFs&v=3&callback=initMap')
   }
 
   loadMapScript(src) {
