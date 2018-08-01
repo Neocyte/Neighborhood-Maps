@@ -31,6 +31,7 @@ class Map extends React.Component {
       center: {lat: 40.7160857, lng: -73.9990696},
       zoom: 17
     });
+
     this.addMarkers();
   }
 
@@ -126,7 +127,27 @@ class Map extends React.Component {
 
   render() {
     return (
-      <div id="map"></div>
+      <div className="container">
+
+        <div className="text-input">
+          <input
+            role="search"
+            type="text"
+            value={this.state.value}
+            onChange={this.handleQuery}
+          />
+
+          <ul className="locations-list">
+          {
+            markers.filter(m => m.getVisible()).map((m, index) =>
+              (<li key={index}>{m.title}</li>))
+          }
+          </ul>
+        </div>
+
+        <div role="application" className="map" id="map"</div>
+
+      </div>
     )
   }
 }
