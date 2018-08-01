@@ -1,5 +1,4 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
 import Map from './Map';
 import './App.css';
 
@@ -24,7 +23,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-      
+
         <a className="menu" tabIndex="0">
           <svg className="hamburger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
