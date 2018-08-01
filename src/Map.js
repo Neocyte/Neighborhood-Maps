@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 class Map extends React.Component {
 
   state = {
-    locations = [
+    locations: [
       {title: 'Hong Kong Supermarket', location: {lat: 40.7158702, lng: -74.0016874}},
       {title: 'New York Mart', location: {lat: 40.7162727, lng: -73.9988872}},
       {title: 'Q Q Bakery', location: {lat: 40.7139409, lng: -73.9972886}},
@@ -24,6 +24,8 @@ class Map extends React.Component {
   //------------------------------MAP-------------------------------------------
 
   initMap() {
+    const {google} = this.props;
+
     // Creates the default map
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 40.7160857, lng: -73.9990696},
@@ -41,28 +43,29 @@ class Map extends React.Component {
     const showLocation = (event) => {
       const {markers} = this.state
       const markerIndex =
-        markers.findIndex(m => m.title.toLowerCase() === e.target.innerText.toLowerCase());
+        markers.findIndex(m => m.title.toLowerCase() === event.target.innerText.toLowerCase());
         this.populateInfoWindow(markers[markerIndex], infowindow);
     };
 
     document.querySelector('.locations-list').addEventListener('click', function (event) {
-      if (e.target && e.target.nodeName === "LI") {
+      if (event.target && event.target.nodeName === "LI") {
         showLocation(event);
       }
     });
-  }
+  };
 
   //-----------------------------Filter-----------------------------------------
 
   handleQuery = (event) => {
     this.setState({query: event.target.value});
-  }
+  };
 
   //-----------------------------MARKER-----------------------------------------
 
   addMarkers = () => {
-    const defaultIcon = makeMarkerIcon('0091ff');
-    const highlightedIcon = makeMarkerIcon('FFFF24');
+    const {google} = this.props
+    const defaultIcon = this.makeMarkerIcon('0091ff');
+    const highlightedIcon = this.makeMarkerIcon('FFFF24');
     const bounds = new google.maps.LatLngBounds();
 
     // Loops through each location to create a marker for each location
@@ -70,8 +73,8 @@ class Map extends React.Component {
       const marker = new google.maps.Marker({
         position: location.location,
         map: this.map,
-        title: location.title
-        icon: this.state.defaultIcon,
+        title: location.title,
+        icon: defaultIcon,
         animation: google.maps.Animation.DROP
       });
 
@@ -92,19 +95,21 @@ class Map extends React.Component {
       marker.addListener('mouseout', () => {
         this.setIcon(defaultIcon);
       });
-    }
+    });
+  };
 
   // Takes in a color and creates a custom marker icon
   makeMarkerIcon = (markerColor) => {
-    const markerImage = new google.maps.MarkerImage(
-      'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
+    const {google} = this.props;
+    let markerImage = new google.maps.MarkerImage(
+      'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor +
       '|40|_|%E2%80%A2',
       new google.maps.Size(21, 34),
       new google.maps.Point(0, 0),
       new google.maps.Point(10, 34),
       new google.maps.Size(21,34));
     return markerImage;
-  }
+  };
 
   //-----------------------------INFOWINDOW-------------------------------------
 
@@ -121,7 +126,7 @@ class Map extends React.Component {
       // Open the infowindow on the correct marker
       infowindow.open(this.map, marker);
     }
-  }
+  };
 
   //-----------------------------RENDER-----------------------------------------
 
@@ -139,13 +144,13 @@ class Map extends React.Component {
 
           <ul className="locations-list">
           {
-            markers.filter(m => m.getVisible()).map((m, index) =>
+            this.state.markers.filter(m => m.getVisible()).map((m, index) =>
               (<li key={index}>{m.title}</li>))
           }
           </ul>
         </div>
 
-        <div role="application" className="map" id="map"</div>
+        <div role="application" className="map" id="map"></div>
 
       </div>
     )
