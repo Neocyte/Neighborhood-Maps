@@ -14,8 +14,6 @@ class Map extends React.Component {
     query: '',
     markers: [],
     infowindow: new this.props.google.maps.InfoWindow(),
-    defaultIcon: makeMarkerIcon('0091ff'),
-    highlightedIcon: makeMarkerIcon('FFFF24')
   };
 
   componentDidMount() {
@@ -63,6 +61,8 @@ class Map extends React.Component {
   //-----------------------------MARKER-----------------------------------------
 
   addMarkers = () => {
+    const defaultIcon = makeMarkerIcon('0091ff');
+    const highlightedIcon = makeMarkerIcon('FFFF24');
     const bounds = new google.maps.LatLngBounds();
 
     // Loops through each location to create a marker for each location
@@ -87,10 +87,10 @@ class Map extends React.Component {
 
       // Switches between highlighted and default icons on hover
       marker.addListener('mouseover', () => {
-        this.setIcon(this.state.highlightedIcon);
+        this.setIcon(highlightedIcon);
       });
       marker.addListener('mouseout', () => {
-        this.setIcon(this.state.defaultIcon);
+        this.setIcon(defaultIcon);
       });
     }
 
