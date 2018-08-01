@@ -56,7 +56,28 @@ class Map extends React.Component {
   //-----------------------------Filter-----------------------------------------
 
   handleQuery = (event) => {
+    const {locations, query, markers, infowindow} = this.state;
+
     this.setState({query: event.target.value});
+
+    if (query) {
+      locations.forEach((location, index) => {
+        if (location.name.toLowerCase().includes(query.toLowerCase())) {
+          markers[index].setVisible(true);
+        } else {
+          if (infowindow.marker === markers[index]) {
+            infowindow.close();
+          }
+          markers[index].setVisible(false);
+        }
+      });
+    } else {
+      locations.forEach((location, index) => {
+        if (markers.length && markers[index]) {
+          markers[index].setVisible(true);
+        }
+      });
+    }
   };
 
   //-----------------------------MARKER-----------------------------------------
