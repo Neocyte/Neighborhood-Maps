@@ -2,6 +2,16 @@
 	outline: 2px solid #00f;
 }
 
+.gm-style-iw {
+	text-align: left;
+}
+
+b:first-child {
+	color: #f00;
+	font-size: 18px;
+	text-decoration: underline;
+}
+
 .heading {
   margin: 0;
   text-align: center;

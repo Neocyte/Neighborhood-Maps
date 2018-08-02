@@ -136,16 +136,16 @@ class Map extends React.Component {
 
   //-----------------------------INFOWINDOW-------------------------------------
 
-  // Adds information to each marker's infowindow
+  // Controls infowindow animations and content
   populateInfoWindow = (marker, infowindow) => {
     const {google} = this.props
     const {markers} = this.state;
     const defaultIcon = this.makeMarkerIcon('F00');
     const highlightedIcon = this.makeMarkerIcon('FFFF33');
 
-    // Check to make sure the infowindow is not already opened on this marker
+    // Checks to make sure the infowindow is not already opened on this marker
     if (infowindow.marker !== marker) {
-      // Change marker icon color of clicked marker and add bounce
+      // Changes marker icon color of clicked marker and add bounce
       marker.setIcon(highlightedIcon);
       if (marker.getAnimation() !== null) {
         marker.setAnimation(null);
@@ -153,27 +153,66 @@ class Map extends React.Component {
         marker.setAnimation(google.maps.Animation.BOUNCE);
       }
 
-      // Reset the previous marker if a new marker is focussed
+      // Resets the previous marker if a new marker is focussed
       if (infowindow.marker) {
         const markerIndex = markers.findIndex(m => m.title === infowindow.marker.title);
         markers[markerIndex].setIcon(defaultIcon);
         markers[markerIndex].setAnimation(null);
       }
 
-      // Reset the previous marker if the infowindow is closed
+      // Resets the previous marker if the infowindow is closed
       infowindow.addListener('closeclick', () => {
         infowindow.marker = null;
         marker.setAnimation(null);
         marker.setIcon(defaultIcon);
       });
 
-      // Set infowindow's content to the location's title
+      // Adds information to each marker's infowindow
       infowindow.marker = marker;
-      infowindow.setContent(`<h3>${marker.title}</h3>`);
+      this.getInfo(marker);
 
-      // Open the infowindow on the correct marker
+      // Opens the infowindow on the correct marker
       infowindow.open(this.map, marker);
     }
+  };
+
+  // Fetches data from foursquare API that will be used in the infowindow - https://foursquare.com/
+  getInfo = (marker) => {
+    const {infowindow} = this.state;
+    const clientId = "2NAKRXQ3FJ3GIIHDD4Q4W1EI2HL4PTIWKTAMW0Q2HQHGWTIJ";
+    const clientSecret = "YBND1TNSSL3UKGUFWDBTPDB5OD2KHEYI0PN1SDW3SF12TSYQ";
+    const venueId = "4a83505ef964a520bffa1fe3";
+    const url = "https://api.foursquare.com/v2/venues/" + venueId + "?&client_id=" + clientId + "&client_secret=" + clientSecret + "&v=20180802";
+    fetch(url)
+      .then(
+        function (response) {
+          if (response.status !== 200) {
+            infowindow.setContent("Data failed to load");
+            return;
+          }
+
+          // Examine the text in the response
+          response.json().then(function (data) {
+            let name_data = data.response.venue.name;
+            let location_data = data.response.venue.location.formattedAddress;
+            let contact_data = data.response.venue.contact.formattedPhone;
+            let url_data = data.response.venue.url;
+            let rating_data = data.response.venue.rating;
+
+            let name = `<b>${name_data}</b>` + '<br>';
+            let address = '<b>Address: </b>' + location_data + '<br>';
+            let phone = '<b>Phone: </b>' + contact_data + '<br>';
+            let site = '<b>Website: </b>' + url_data + '<br>';
+            let rating = '<b>Rating: </b>' + rating_data + '<br>';
+            let more = '<a href="https://foursquare.com/v/'+ data.response.venue.id +'" target="_blank">Read More on Foursquare Website</a>'
+
+            infowindow.setContent(name + address + phone + site + rating + more);
+          });
+        }
+      )
+      .catch(function (error) {
+        infowindow.setContent("Data failed to load");
+      });
   };
 
   //-----------------------------RENDER-----------------------------------------
