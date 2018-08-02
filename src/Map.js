@@ -65,8 +65,9 @@ class Map extends React.Component {
     if (query) {
       locations.forEach((location, index) => {
         // Reveals marker if query is successful
-        if (location.name.toLowerCase().includes(query.toLowerCase())) {
+        if (location.title.toLowerCase().includes(query.toLowerCase())) {
           markers[index].setVisible(true);
+          this.populateInfoWindow(markers[index], infowindow);
         } else {
           // Close infowindow if marker is removed
           if (infowindow.marker === markers[index]) {
@@ -168,8 +169,9 @@ class Map extends React.Component {
         <div className="text-input">
           <input
             role="search"
+            aria-labelledby="filter"
             type="text"
-            value={this.state.value}
+            value={this.state.query}
             onChange={this.handleQuery}
           />
 
