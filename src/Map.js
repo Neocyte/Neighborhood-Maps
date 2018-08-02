@@ -22,10 +22,10 @@ class Map extends React.Component {
 
   //------------------------------MAP-------------------------------------------
 
+  // Creates the default map and adds the markers
   initMap() {
     const {google} = this.props;
 
-    // Creates the default map
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 40.7160857, lng: -73.9990696},
       zoom: 17
@@ -36,6 +36,7 @@ class Map extends React.Component {
 
   //-------------------------Location List--------------------------------------
 
+  // Shows a location's marker and infowindow when the user clicks on the list
   clickLocationList = () => {
     const {infowindow} = this.state;
 
@@ -55,6 +56,7 @@ class Map extends React.Component {
 
   //-----------------------------Filter-----------------------------------------
 
+  // Filters what locations are visible based on the user's query value
   handleQuery = (event) => {
     const {locations, query, markers, infowindow} = this.state;
 
@@ -62,16 +64,20 @@ class Map extends React.Component {
 
     if (query) {
       locations.forEach((location, index) => {
+        // Reveals marker if query is successful
         if (location.name.toLowerCase().includes(query.toLowerCase())) {
           markers[index].setVisible(true);
         } else {
+          // Close infowindow if marker is removed
           if (infowindow.marker === markers[index]) {
             infowindow.close();
           }
+          // Hides marker if query is unsuccessful
           markers[index].setVisible(false);
         }
       });
     } else {
+      // Reveal all markers if query is empty
       locations.forEach((location, index) => {
         if (markers.length && markers[index]) {
           markers[index].setVisible(true);
@@ -82,13 +88,13 @@ class Map extends React.Component {
 
   //-----------------------------MARKER-----------------------------------------
 
+  // Loops through each location to create a marker for each location
   addMarkers = () => {
     const {google} = this.props
-    const defaultIcon = this.makeMarkerIcon('0091ff');
-    const highlightedIcon = this.makeMarkerIcon('FFFF24');
+    const defaultIcon = this.makeMarkerIcon('F00');
+    const highlightedIcon = this.makeMarkerIcon('FFFF33');
     const bounds = new google.maps.LatLngBounds();
 
-    // Loops through each location to create a marker for each location
     this.state.locations.forEach((location, index) => {
       const marker = new google.maps.Marker({
         position: location.location,
@@ -110,12 +116,17 @@ class Map extends React.Component {
 
       // Switches between highlighted and default icons on hover
       marker.addListener('mouseover', () => {
-        this.setIcon(highlightedIcon);
+        marker.setIcon(highlightedIcon);
       });
       marker.addListener('mouseout', () => {
-        this.setIcon(defaultIcon);
+        marker.setIcon(defaultIcon);
       });
+
+      // Extend bounds object
+      bounds.extend(marker.position);
     });
+
+    this.map.fitBounds(bounds);
   };
 
   // Takes in a color and creates a custom marker icon
@@ -138,7 +149,7 @@ class Map extends React.Component {
     // Check to make sure the infowindow is not already opened on this marker
     if (infowindow.marker !== marker) {
       infowindow.marker = marker;
-      infowindow.setContent('<h3>${marker.title}</h3>');
+      infowindow.setContent(`<h3>${marker.title}</h3>`);
       // Make sure the marker property is cleared if the infowindow is closed
       infowindow.addListener('closeclick', () => {
         infowindow.marker = null;
