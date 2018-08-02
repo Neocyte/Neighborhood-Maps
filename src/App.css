@@ -5,7 +5,7 @@
 .heading {
   margin: 0;
   text-align: center;
-  background-image: url('http://www.baiduchineserestaurant.com/images/center-banner.jpg');
+  background-image: url('http://www.baiduchineserestaurant.com/images/center-banner.jpg'); /* Source: http://www.baiduchineserestaurant.com/ */
   color: #ffff33;
   padding: 1%;
   font-size: 32px;
