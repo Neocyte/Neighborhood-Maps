@@ -172,13 +172,14 @@ class Map extends React.Component {
             aria-labelledby="filter"
             type="text"
             value={this.state.query}
+            tabIndex="0"
             onChange={this.handleQuery}
           />
 
           <ul className="locations-list">
           {
             this.state.markers.filter(m => m.getVisible()).map((m, index) =>
-              (<li key={index}>{m.title}</li>))
+              (<li key={index} tabIndex="0">{m.title}</li>))
           }
           </ul>
         </div>
