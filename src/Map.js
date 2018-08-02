@@ -195,7 +195,7 @@ class Map extends React.Component {
           <ul className="locations-list">
           {
             this.state.markers.filter(m => m.getVisible()).map((m, index) =>
-              (<li key={index} tabIndex="0">{m.title}</li>))
+              (<li key={index} role="button" tabIndex="0">{m.title}</li>))
           }
           </ul>
         </div>
