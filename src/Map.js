@@ -187,6 +187,7 @@ class Map extends React.Component {
             role="search"
             aria-label="search"
             type="text"
+            placeholder="Filter Locations"
             value={this.state.query}
             tabIndex="0"
             onChange={this.handleQuery}
