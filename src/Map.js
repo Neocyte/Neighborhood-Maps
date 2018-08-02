@@ -185,7 +185,7 @@ class Map extends React.Component {
         <div className="text-input">
           <input
             role="search"
-            aria-labelledby="filter"
+            aria-label="search"
             type="text"
             value={this.state.query}
             tabIndex="0"
