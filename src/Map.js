@@ -42,9 +42,9 @@ class Map extends React.Component {
 
     const showLocation = (event) => {
       const {markers} = this.state
-      const markerIndex =
-        markers.findIndex(m => m.title.toLowerCase() === event.target.innerText.toLowerCase());
-        this.populateInfoWindow(markers[markerIndex], infowindow);
+      const markerIndex = markers.findIndex(m => m.title.toLowerCase() === event.target.innerText.toLowerCase());
+
+      this.populateInfoWindow(markers[markerIndex], infowindow);
     };
 
     document.querySelector('.locations-list').addEventListener('click', function (event) {
@@ -91,9 +91,8 @@ class Map extends React.Component {
 
   // Loops through each location to create a marker for each location
   addMarkers = () => {
-    const {google} = this.props
+    const {google} = this.props;
     const defaultIcon = this.makeMarkerIcon('F00');
-    const highlightedIcon = this.makeMarkerIcon('FFFF33');
     const bounds = new google.maps.LatLngBounds();
 
     this.state.locations.forEach((location, index) => {
@@ -113,14 +112,6 @@ class Map extends React.Component {
       // Open an infowindow at each marker on click
       marker.addListener('click', () => {
         this.populateInfoWindow(marker, this.state.infowindow);
-      });
-
-      // Switches between highlighted and default icons on hover
-      marker.addListener('mouseover', () => {
-        marker.setIcon(highlightedIcon);
-      });
-      marker.addListener('mouseout', () => {
-        marker.setIcon(defaultIcon);
       });
 
       // Extend bounds object
@@ -147,14 +138,39 @@ class Map extends React.Component {
 
   // Adds information to each marker's infowindow
   populateInfoWindow = (marker, infowindow) => {
+    const {google} = this.props
+    const {markers} = this.state;
+    const defaultIcon = this.makeMarkerIcon('F00');
+    const highlightedIcon = this.makeMarkerIcon('FFFF33');
+
     // Check to make sure the infowindow is not already opened on this marker
     if (infowindow.marker !== marker) {
-      infowindow.marker = marker;
-      infowindow.setContent(`<h3>${marker.title}</h3>`);
-      // Make sure the marker property is cleared if the infowindow is closed
+      // Change marker icon color of clicked marker and add bounce
+      marker.setIcon(highlightedIcon);
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+
+      // Reset the previous marker if a new marker is focussed
+      if (infowindow.marker) {
+        const markerIndex = markers.findIndex(m => m.title === infowindow.marker.title);
+        markers[markerIndex].setIcon(defaultIcon);
+        markers[markerIndex].setAnimation(null);
+      }
+
+      // Reset the previous marker if the infowindow is closed
       infowindow.addListener('closeclick', () => {
         infowindow.marker = null;
+        marker.setAnimation(null);
+        marker.setIcon(defaultIcon);
       });
+
+      // Set infowindow's content to the location's title
+      infowindow.marker = marker;
+      infowindow.setContent(`<h3>${marker.title}</h3>`);
+
       // Open the infowindow on the correct marker
       infowindow.open(this.map, marker);
     }
