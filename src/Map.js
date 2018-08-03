@@ -4,11 +4,11 @@ class Map extends React.Component {
 
   state = {
     locations: [
-      {title: 'Hong Kong Supermarket', location: {lat: 40.7158702, lng: -74.0016874}},
-      {title: 'New York Mart', location: {lat: 40.7162727, lng: -73.9988872}},
-      {title: 'Q Q Bakery', location: {lat: 40.7139409, lng: -73.9972886}},
-      {title: 'Vivi Bubble Tea', location: {lat: 40.7153132, lng: -73.9996167}},
-      {title: 'Tasty Hand-Pulled Noodles', location: {lat: 40.714193, lng: -73.9982381}}
+      {title: 'Hong Kong Supermarket', location: {lat: 40.7158702, lng: -74.0016874}, venueId: '4ae4bf7ef964a520bf9d21e3'},
+      {title: 'New York Mart', location: {lat: 40.7162727, lng: -73.9988872}, venueId: '4e358975c65b2313e28e56c7'},
+      {title: 'Q Q Bakery', location: {lat: 40.7139409, lng: -73.9972886}, venueId: '4bf042f4f831c9285fce01f2'},
+      {title: 'Vivi Bubble Tea', location: {lat: 40.7153132, lng: -73.9996167}, venueId: '4a83505ef964a520bffa1fe3'},
+      {title: 'Tasty Hand-Pulled Noodles', location: {lat: 40.714193, lng: -73.9982381}, venueId: '4a7655b0f964a520dce21fe3'}
     ],
     query: '',
     markers: [],
@@ -181,8 +181,9 @@ class Map extends React.Component {
     const {infowindow} = this.state;
     const clientId = "2NAKRXQ3FJ3GIIHDD4Q4W1EI2HL4PTIWKTAMW0Q2HQHGWTIJ";
     const clientSecret = "YBND1TNSSL3UKGUFWDBTPDB5OD2KHEYI0PN1SDW3SF12TSYQ";
-    const venueId = "4a83505ef964a520bffa1fe3";
+    let venueId = '';
     const url = "https://api.foursquare.com/v2/venues/" + venueId + "?&client_id=" + clientId + "&client_secret=" + clientSecret + "&v=20180802";
+
     fetch(url)
       .then(
         function (response) {
@@ -199,7 +200,7 @@ class Map extends React.Component {
             let url_data = data.response.venue.url;
             let rating_data = data.response.venue.rating;
 
-            let name = `<b>${name_data}</b>` + '<br>';
+            let name = '<b>' + name_data + '</b>' + '<br>';
             let address = '<b>Address: </b>' + location_data + '<br>';
             let phone = '<b>Phone: </b>' + contact_data + '<br>';
             let site = '<b>Website: </b>' + url_data + '<br>';
