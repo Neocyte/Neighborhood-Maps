@@ -28,12 +28,14 @@ This project required that I create an entire application from scratch. It invol
 
   * You can click on the location list or each location's marker to reveal more information about that particular location.
 
-  * You can type inside the search bar to filter through the 5 locations. 
+  * You can type inside the search bar to filter through the 5 locations.
 
 ## Important
-By default, the create-react-app includes a service worker in the production build. To run a production build: `npm build`.
+* By default, the create-react-app includes a service worker in the production build. To run a production build: `npm build`.
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+* This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+
+* This project uses the [Foursquare Places API](https://developer.foursquare.com/docs/api/venues/details) to fetch information about each location.
 
 ## Contributing
 
