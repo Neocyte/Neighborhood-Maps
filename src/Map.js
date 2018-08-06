@@ -67,7 +67,6 @@ class Map extends React.Component {
         // Reveals marker if query is successful
         if (location.title.toLowerCase().includes(query.toLowerCase())) {
           markers[index].setVisible(true);
-          this.populateInfoWindow(markers[index], infowindow);
         } else {
           // Close infowindow if marker is removed
           if (infowindow.marker === markers[index]) {
