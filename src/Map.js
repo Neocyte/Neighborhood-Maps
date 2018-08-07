@@ -56,34 +56,9 @@ class Map extends React.Component {
 
   //-----------------------------Filter-----------------------------------------
 
-  // Filters what locations are visible based on the user's query value
+  // Sets query to whatever the user types in the search bar
   handleQuery = (event) => {
-    const {locations, query, markers, infowindow} = this.state;
-
     this.setState({query: event.target.value});
-
-    if (query) {
-      locations.forEach((location, index) => {
-        // Reveals marker if query is successful
-        if (location.title.toLowerCase().includes(query.toLowerCase())) {
-          markers[index].setVisible(true);
-        } else {
-          // Close infowindow if marker is removed
-          if (infowindow.marker === markers[index]) {
-            infowindow.close();
-          }
-          // Hides marker if query is unsuccessful
-          markers[index].setVisible(false);
-        }
-      });
-    } else {
-      // Reveal all markers if query is empty
-      locations.forEach((location, index) => {
-        if (markers.length && markers[index]) {
-          markers[index].setVisible(true);
-        }
-      });
-    }
   };
 
   //-----------------------------MARKER-----------------------------------------
@@ -218,6 +193,31 @@ class Map extends React.Component {
   //-----------------------------RENDER-----------------------------------------
 
   render() {
+    // Filters markers based on query
+    const {locations, query, markers, infowindow} = this.state;
+    if (query) {
+      locations.forEach((location, index) => {
+        // Reveals marker if query is successful
+        if (location.title.toLowerCase().includes(query.toLowerCase())) {
+          markers[index].setVisible(true);
+        } else {
+          // Close infowindow if marker is removed
+          if (infowindow.marker === markers[index]) {
+            infowindow.close();
+          }
+          // Hides marker if query is unsuccessful
+          markers[index].setVisible(false);
+        }
+      });
+    } else {
+      // Reveal all markers if query is empty
+      locations.forEach((location, index) => {
+        if (markers.length && markers[index]) {
+          markers[index].setVisible(true);
+        }
+      });
+    }
+
     return (
       <div className="container">
 
