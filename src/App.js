@@ -10,6 +10,9 @@ class App extends React.Component {
       <div>
         <h1 className="heading">Great Eats at Chinatown, New York</h1>
         <Map google={this.props.google}/>
+        <footer>
+          <a href="https://developer.foursquare.com/docs/api/venues/details" className="apiLink" tabIndex="0">Powered By Foursquare Places API</a>
+        </footer>
       </div>
     )
   }

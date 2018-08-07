@@ -81,6 +81,13 @@ b:first-child {
   line-height: 1.8cm;
 }
 
+footer {
+	margin: 0;
+	padding: 0.5%;
+	text-align: center;
+	background-color: #000;
+}
+
 /* ======================== Small Devices ======================== */
 
 @media screen and (max-width: 600px) {
