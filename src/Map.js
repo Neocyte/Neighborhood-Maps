@@ -238,6 +238,8 @@ class Map extends React.Component {
               (<li key={index} role="button" tabIndex="0">{m.title}</li>))
           }
           </ul>
+
+          <a href="https://developer.foursquare.com/docs/api/venues/details" className="apiLink" tabIndex="0">Powered By Foursquare Places API</a>
         </div>
 
         <div role="application" className="map" id="map"></div>

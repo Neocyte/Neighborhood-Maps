@@ -21,6 +21,18 @@ b:first-child {
   font-size: 32px;
 }
 
+.apiLink {
+	color: #ffff33;
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 0.8cm;
+}
+
+.apiLink:hover {
+	text-decoration: underline;
+}
+
 .map {
   margin: 0;
   width: 85%;
