@@ -16,7 +16,9 @@ class App extends React.Component {
 }
 
 // Listens for Google Maps API errors
-function gm_authFailure() {}
+function gm_authFailure() {
+  alert("Google Maps API failed to load");
+}
 
 // Loads Google Maps API
 // Source: https://www.npmjs.com/package/google-maps-react
