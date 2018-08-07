@@ -75,7 +75,8 @@ class Map extends React.Component {
         map: this.map,
         title: location.title,
         icon: defaultIcon,
-        animation: google.maps.Animation.DROP
+        animation: google.maps.Animation.DROP,
+        venueId: location.venueId
       });
 
       // Push the marker to our array of markers
@@ -155,7 +156,7 @@ class Map extends React.Component {
     const {infowindow} = this.state;
     const clientId = "2NAKRXQ3FJ3GIIHDD4Q4W1EI2HL4PTIWKTAMW0Q2HQHGWTIJ";
     const clientSecret = "YBND1TNSSL3UKGUFWDBTPDB5OD2KHEYI0PN1SDW3SF12TSYQ";
-    let venueId = '';
+    let venueId = marker.venueId;
     const url = "https://api.foursquare.com/v2/venues/" + venueId + "?&client_id=" + clientId + "&client_secret=" + clientSecret + "&v=20180802";
 
     fetch(url)
