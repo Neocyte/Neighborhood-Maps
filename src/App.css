@@ -21,7 +21,19 @@ b:first-child {
   font-size: 32px;
 }
 
-.apiLink {
+.api-error {
+	display: none; /* Hidden by default */
+	margin: 0;
+	text-align: center;
+	color: #ffff33;
+	background-color: #000;
+	padding: 0.5%;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 0.8cm;
+}
+
+.api-link {
 	color: #ffff33;
 	font-size: 20px;
 	font-weight: bold;
@@ -29,7 +41,7 @@ b:first-child {
 	line-height: 0.8cm;
 }
 
-.apiLink:hover {
+.api-link:hover {
 	text-decoration: underline;
 }
 
@@ -77,7 +89,7 @@ b:first-child {
   font-weight: bold;
   text-decoration: none;
   color: #ffff33;
-  background-color: #212121;
+  background-color: #000;
   line-height: 1.8cm;
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { GoogleApiWrapper } from 'google-maps-react';
 import Map from './Map';
+import Error from './Error';
 import './App.css';
 
 
@@ -9,18 +10,14 @@ class App extends React.Component {
     return (
       <div>
         <h1 className="heading">Great Eats at Chinatown, New York</h1>
+        <Error />
         <Map google={this.props.google}/>
         <footer>
-          <a href="https://developer.foursquare.com/docs/api/venues/details" className="apiLink" tabIndex="0">Powered By Foursquare Places API</a>
+          <a href="https://developer.foursquare.com/docs/api/venues/details" className="api-link" tabIndex="0">Powered By Foursquare Places API</a>
         </footer>
       </div>
     )
   }
-}
-
-// Listens for Google Maps API errors
-function gm_authFailure() {
-  alert("Google Maps API failed to load");
 }
 
 // Loads Google Maps API
