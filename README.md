@@ -14,13 +14,7 @@ This project required that I create an entire application from scratch. It invol
 
 ## Installation
 
-1. Clone the repository
-
-2. `cd` into the root directory
-
-3. Install all dependencies: `npm install`
-
-4. Start local server: `npm start`
+To access the project, click [here](https://neocyte.github.io/Neighborhood-Maps/).
 
 ## How-To-Use
 
