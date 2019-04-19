@@ -1,4 +1,4 @@
-# MyReads Project
+# Neighborhood Map Project
 
 ## Table of Contents
 
