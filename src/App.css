@@ -1,5 +1,6 @@
 :focus {
-	outline: 2px solid #00f;
+	box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  border: 1px solid rgba(81, 203, 238, 1);
 }
 
 .gm-style-iw {
@@ -15,7 +16,7 @@ b:first-child {
 .heading {
   margin: 0;
   text-align: center;
-  background-image: url('http://www.baiduchineserestaurant.com/images/center-banner.jpg'); /* Source: http://www.baiduchineserestaurant.com/ */
+  background-color: #222;
   color: #ffff33;
   padding: 1%;
   font-size: 32px;
@@ -62,15 +63,16 @@ b:first-child {
 
 .text-input {
   width: 15%;
-  background-color: #85161C;
+  background-color: #fff;
   height: 100vh;
 }
 
+
 .text-input input {
-  width: 74.3%;
+  width: 100%;
   line-height: 0.8cm;
   padding: 5%;
-  padding-left: 20%;
+  padding-left: 25%;
   border: 1px solid #000;
   font-size: 20px;
   color: #808080;
@@ -78,6 +80,8 @@ b:first-child {
   background-repeat: no-repeat;
   background-position: left center;
   outline: 0;
+	margin-bottom: -5.5%;
+	margin-left: -1%;
 }
 
 .text-input ul {
@@ -85,19 +89,34 @@ b:first-child {
   padding-left: 0;
 }
 
+.text-input li:first-child {
+	border-top: 0px;
+}
+
+.text-input li:last-child {
+	border-bottom: 2px solid #eee;
+}
+
 .text-input li {
   font-weight: bold;
   text-decoration: none;
-  color: #ffff33;
-  background-color: #000;
+  color: #000;
+  background-color: #fff;
   line-height: 1.8cm;
+	border-top: 2px solid #eee;
+	-webkit-transition: all 0.20s ease-in-out;
+}
+
+.text-input li:hover {
+	background-color: yellow;
+	cursor: pointer;
 }
 
 footer {
 	margin: 0;
 	padding: 0.5%;
 	text-align: center;
-	background-color: #000;
+	background-color: #222;
 }
 
 /* ======================== Small Devices ======================== */
