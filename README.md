@@ -14,7 +14,7 @@ This project required that I create an entire application from scratch. It invol
 
 ## Installation
 
-To access the project, click [here](https://neocyte.github.io/Neighborhood-Maps/).
+To access the project, click [here](https://neocyte-neighborhoodmap.herokuapp.com/).
 
 ## How-To-Use
 
