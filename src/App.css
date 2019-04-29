@@ -79,7 +79,7 @@ b:first-child {
   background-repeat: no-repeat;
   background-position: left center;
   outline: 0;
-	margin-bottom: -5.5%;
+	margin-bottom: -6.2%;
 }
 
 .text-input ul {
@@ -148,8 +148,8 @@ footer {
 
 	.text-input input {
 		line-height: 0.6cm;
-		padding: 4% 0 4% 0;
-		margin: 0 0 -5% 0;
+		padding: 4.2% 0;
+		margin-bottom: -5%;
 		border: none;
 	}
 
@@ -187,8 +187,8 @@ footer {
   }
 
 	.text-input input {
-		padding: 2% 0 2% 0;
-		margin: 0 0 -5% 0;
+		padding: 3.1% 0;
+		margin-bottom: -5%;
 		border: none;
 		font-size: 30px;
 	}
@@ -214,8 +214,8 @@ footer {
   }
 
 	.text-input input {
-		padding: 2% 0 2% 0;
-		margin: 0 0 -5% 0;
+		padding: 2.3% 0;
+		margin-bottom: -5%;
 		border: none;
 		line-height: 0.8cm;
 	}
